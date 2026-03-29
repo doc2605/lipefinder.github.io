@@ -1,0 +1,5 @@
+{
+  "name": "Qual o Nick do Lipe?",
+  "description": "Um site para acompanhar o nick atual e a skin do jogador Lipe no Minecraft.",
+  "requestFramePermissions": []
+}
