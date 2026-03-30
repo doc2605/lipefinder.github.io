@@ -1,0 +1,40 @@
+name: Deploy Vite React to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+
+permissions:
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar repo
+        uses: actions/checkout@v3
+
+      - name: Instalar Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Buildar projeto
+        run: npm run build
+
+      - name: Upload do site
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: dist   # ⚠️ AQUI É O PULO DO GATO (VITE)
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy
+        uses: actions/deploy-pages@v2
