@@ -14,10 +14,10 @@ jobs:
 
     steps:
       - name: Clonar repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4   # 👈 atualizado
 
       - name: Instalar Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4  # 👈 atualizado
         with:
           node-version: 18
 
@@ -28,13 +28,13 @@ jobs:
         run: npm run build
 
       - name: Upload do site
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3  # 👈 atualizado
         with:
-          path: dist   # ⚠️ AQUI É O PULO DO GATO (VITE)
+          path: dist
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Deploy
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4  # 👈 atualizado
