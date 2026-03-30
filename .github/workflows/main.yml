@@ -13,22 +13,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clonar repo
-        uses: actions/checkout@v4   # 👈 atualizado
+      - uses: actions/checkout@v4
 
-      - name: Instalar Node
-        uses: actions/setup-node@v4  # 👈 atualizado
+      - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
+
+      - name: Limpar cache
+        run: rm -rf node_modules package-lock.json
 
       - name: Instalar dependências
-        run: npm install
+        run: npm install --legacy-peer-deps
 
-      - name: Buildar projeto
+      - name: Build
         run: npm run build
 
-      - name: Upload do site
-        uses: actions/upload-pages-artifact@v3  # 👈 atualizado
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
@@ -36,5 +36,4 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy
-        uses: actions/deploy-pages@v4  # 👈 atualizado
+      - uses: actions/deploy-pages@v4
